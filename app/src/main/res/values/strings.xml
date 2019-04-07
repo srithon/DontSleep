@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DontSleep</string>
+    <string name="text_box_hint">Enter Text Please</string>
+    <string name="button_text">Click Me</string>
+    <string name="interval_prompt_hint_text">Enter interval (minutes)</string>
+    <string name="select_interval_submit_text">Confirm</string>
+    <string name="alarm_cancel_button_text">Cancel Alarm</string>
+</resources>
