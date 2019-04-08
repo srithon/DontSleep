@@ -1,4 +1,4 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import org.junit.Test;
 

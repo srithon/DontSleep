@@ -1,15 +1,10 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
-import android.media.AudioFormat;
-import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class AlarmCanceller {
     private static final int SAMPLE_RATE = 9000;

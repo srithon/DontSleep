@@ -1,6 +1,7 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import androidx.appcompat.app.AppCompatActivity;
+import thoniyil.sridaran.dontsleep.R;
 
 import android.content.Intent;
 import android.os.Bundle;

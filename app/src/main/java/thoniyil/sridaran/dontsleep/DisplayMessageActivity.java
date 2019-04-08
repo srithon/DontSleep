@@ -1,7 +1,7 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import thoniyil.sridaran.dontsleep.R;
 //import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("thoniyil.sridaran.tutorialfollowingb", appContext.getPackageName());
+        assertEquals("thoniyil.sridaran.dontsleep", appContext.getPackageName());
     }
 }

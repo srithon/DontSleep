@@ -1,6 +1,7 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import androidx.appcompat.app.AppCompatActivity;
+import thoniyil.sridaran.dontsleep.R;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,10 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
-
 public class SelectInterval extends AppCompatActivity {
-    public static final String INTERVAL_SELECTED = "thoniyil.sridaran.tutorialfollowingb.INTERVAL_SELECTED";
+    public static final String INTERVAL_SELECTED = "thoniyil.sridaran.dontsleep.INTERVAL_SELECTED";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

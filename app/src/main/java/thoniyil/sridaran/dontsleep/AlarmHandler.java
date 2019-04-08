@@ -1,22 +1,18 @@
-package thoniyil.sridaran.tutorialfollowingb;
+package thoniyil.sridaran.dontsleep;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.net.Uri;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import androidx.fragment.app.Fragment;
+import thoniyil.sridaran.dontsleep.R;
 
 public class AlarmHandler extends Fragment {
     private static CountDownTimer timer;
