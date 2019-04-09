@@ -19,7 +19,7 @@ import thoniyil.sridaran.dontsleep.R;
 public class AlarmHandler extends Fragment {
     private static CountDownTimer timer;
     private static boolean cancelled = false;
-    private static MediaPlayer on = null;
+    private static MediaPlayer mp = null;
     /*private static AlarmHandler instance;
 
     public static AlarmHandler get()
@@ -49,7 +49,23 @@ public class AlarmHandler extends Fragment {
                 //Intent play_sound = new Intent();
 
                 try {
-                    final MediaPlayer mp = MediaPlayer.create(context, R.raw.beep);
+                    if (mp == null)
+                        mp = MediaPlayer.create(context, R.raw.beep);
+                    else
+                    {
+                        try {
+                            AssetFileDescriptor beep_desc = context.getResources().openRawResourceFd(R.raw.beep);
+                            if (beep_desc == null)
+                                Log.e("tag", "oh no beep_desc is null :(");
+                            mp.setDataSource(beep_desc.getFileDescriptor(), beep_desc.getStartOffset(), beep_desc.getLength());
+                            mp.prepare();
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
                     mp.setVolume(50, 50);
                     mp.setLooping(false);
 
@@ -58,9 +74,10 @@ public class AlarmHandler extends Fragment {
                         //j.stop();
                         //j.release();
                         mp.stop();
-                        mp.release();
+                        //mp.release();
+                        mp.reset();
 
-                        Log.d("tag","Stopped and released mp");
+                        Log.d("tag","Stopped and reset mp");
 
                         if (!AlarmCanceller.listen(textBox)) {
                             Log.d("tag", "Listen returned false");
@@ -96,6 +113,7 @@ public class AlarmHandler extends Fragment {
                                 cancelled = true;
                             } catch (Exception e) {
                                 Log.e("ERROR", "Could not find resource!!");
+                                e.printStackTrace();
                             }
                         }
                         //try {
@@ -139,9 +157,13 @@ public class AlarmHandler extends Fragment {
             textBox.setText("Timer cancelled.");
             final TextView textBox2 = (TextView) view2;
             textBox2.setText("Timer cancelled.");
-            if (on != null) {
-                on.stop();
-                on.release();
+
+            if (mp != null)
+            {
+                mp.stop();
+                mp.reset();
+                mp.release();
+                mp = null;
             }
         } catch (NullPointerException e) {
 
