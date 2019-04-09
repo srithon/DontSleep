@@ -29,7 +29,7 @@ public class AlarmListActivity extends AppCompatActivity {
             interval *= 60;
 
         TextView interval_text = findViewById(R.id.interval_text);
-        interval_text.setText("Repeating alarm every " + interval + (timeUnit ? " minutes" : " seconds"));
+        interval_text.setText("Repeating alarm every " + (timeUnit ? interval + " seconds" : (interval / 60) + " minutes"));
 
         AlarmHandler.countDown(interval, findViewById(R.id.interval_countdown_text), this);
     }

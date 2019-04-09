@@ -55,13 +55,14 @@ public class SelectInterval extends AppCompatActivity {
         try
         {
             intervalVal = Integer.parseInt(message);
-            if (intervalVal < 0)
+            if (intervalVal < 0 || (timeUnitToggle.getState() && intervalVal < 5))
                 throw new NumberFormatException();
             mess.clearComposingText();
         }
         catch (NumberFormatException e)
         {
-            mess.setText("Please enter a number!");
+            mess.setText("Please enter a positive number!\n"
+            + "If the unit is in seconds, it must be >= 5.");
             return;
         }
 

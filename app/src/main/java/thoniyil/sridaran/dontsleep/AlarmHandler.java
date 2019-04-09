@@ -2,7 +2,9 @@ package thoniyil.sridaran.dontsleep;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
@@ -46,62 +48,74 @@ public class AlarmHandler extends Fragment {
 
                 //Intent play_sound = new Intent();
 
-                try
-                {
+                try {
                     final MediaPlayer mp = MediaPlayer.create(context, R.raw.beep);
                     mp.setVolume(50, 50);
                     mp.setLooping(false);
 
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(final MediaPlayer j) {
-                            j.stop();
-                            j.release();
+                    mp.setOnCompletionListener((final MediaPlayer j) ->
+                    {
+                        //j.stop();
+                        //j.release();
+                        mp.stop();
+                        mp.release();
 
-                            if (!AlarmCanceller.listen(textBox))
-                            {
-                                try
-                                {
-                                    Thread.sleep(1000);
-                                }
-                                catch (InterruptedException h)
-                                {
+                        Log.d("tag","Stopped and released mp");
 
-                                }
+                        if (!AlarmCanceller.listen(textBox)) {
+                            Log.d("tag", "Listen returned false");
 
-                                try
-                                {
-                                    on = MediaPlayer.create(context, R.raw.fire_truck_sound);
-                                    on.setVolume(100, 100);
-                                    on.setLooping(true);
-                                    on.start();
-                                    cancelled = true;
-                                }
-                                catch(Exception e)
-                                {
-                                    Log.e("ERROR", "Could not find resource!!");
-                                }
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException h) {
+
                             }
-                            //try {
-                                if (!cancelled)
-                                    AlarmHandler.countDown(interval, ((Activity) context).findViewById(R.id.interval_countdown_text), context);
-                           // } catch (Exception e) {
-                                //textBox.setText("Ugh thta shit dint work");
-                            //}
+
+                            try {
+                                /*on = MediaPlayer.create(context, R.raw.fire_truck_sound);
+                                on.setVolume(100, 100);
+                                on.setLooping(true);
+                                on.start();*/
+
+                                Log.d("tag", "write before afd; get excited");
+                                AssetFileDescriptor afd = context.getResources().openRawResourceFd(R.raw.fire_truck_sound);
+                                if (afd == null)
+                                    Log.e("tag", "oh no afd is null :(");
+                                mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                                Log.d("tag", "set data source");
+                                afd.close();
+                                Log.d("tag", "closed afd");
+                                mp.prepare();
+                                Log.d("tag", "prepared");
+                                mp.setVolume(100, 100);
+                                mp.setLooping(true);
+                                Log.d("tag", "about to start");
+                                mp.start();
+                                Log.d("tag", "started");
+
+                                cancelled = true;
+                            } catch (Exception e) {
+                                Log.e("ERROR", "Could not find resource!!");
+                            }
                         }
+                        //try {
+                        if (!cancelled)
+                            AlarmHandler.countDown(interval, ((Activity) context).findViewById(R.id.interval_countdown_text), context);
+                        // } catch (Exception e) {
+                        //textBox.setText("Ugh thta shit dint work");
+                        //}
                     });
 
                     //try {
-                        //mp.prepare();
-                        mp.start();
+                    //mp.prepare();
+                    mp.start();
                     /*} catch (Exception e) { //(IOException e) {
                         textBox.setText("ERROR: Failed prepare");
                     }*/
 
                 /*SoundPool soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
                 int soundId = soundPool.load(context, R.raw.ringtone, 1);*/
-                }
-                catch (Exception f) {
+                } catch (Exception f) {
                     StringWriter sw = new StringWriter();
                     PrintWriter pw = new PrintWriter(sw);
                     f.printStackTrace(pw);

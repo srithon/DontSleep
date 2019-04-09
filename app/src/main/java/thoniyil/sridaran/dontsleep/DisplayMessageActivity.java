@@ -1,7 +1,6 @@
 package thoniyil.sridaran.dontsleep;
 
 import androidx.appcompat.app.AppCompatActivity;
-import thoniyil.sridaran.dontsleep.R;
 //import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
