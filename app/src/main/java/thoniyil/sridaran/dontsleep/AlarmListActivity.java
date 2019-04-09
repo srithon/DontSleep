@@ -16,6 +16,7 @@ public class AlarmListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alarm_list);
         Intent receivedIntent = getIntent();
         int interval = receivedIntent.getIntExtra(SelectInterval.INTERVAL_SELECTED, -1);
+        boolean timeUnit = receivedIntent.getBooleanExtra(SelectInterval.TIME_UNIT_TOGGLE, false);
 
         /*if (interval == -1) {
             //return to main screen
@@ -24,8 +25,11 @@ public class AlarmListActivity extends AppCompatActivity {
             return;
         }*/
 
+        if (!timeUnit)
+            interval *= 60;
+
         TextView interval_text = findViewById(R.id.interval_text);
-        interval_text.setText("Repeating alarm every " + interval + " minutes.");
+        interval_text.setText("Repeating alarm every " + interval + (timeUnit ? " minutes" : " seconds"));
 
         AlarmHandler.countDown(interval, findViewById(R.id.interval_countdown_text), this);
     }

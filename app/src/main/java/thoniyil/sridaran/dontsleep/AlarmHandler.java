@@ -33,11 +33,11 @@ public class AlarmHandler extends Fragment {
     public static void countDown(final int interval, View view, final Context context) {
         final TextView textBox = (TextView) view;
 
-        timer = new CountDownTimer((interval * 10 * 1000), 1000) {
-            private long millisUntilFinished;
+        timer = new CountDownTimer((interval * 1000), 1000) {
+            //private long millisUntilFinished;
 
             public void onTick(long millisUntilFinished) {
-                this.millisUntilFinished = millisUntilFinished;
+                //this.millisUntilFinished = millisUntilFinished;
                 textBox.setText("Seconds remaining: " + millisUntilFinished / 1000);
             }
 
@@ -62,7 +62,7 @@ public class AlarmHandler extends Fragment {
                             {
                                 try
                                 {
-                                    Thread.sleep(2500);
+                                    Thread.sleep(1000);
                                 }
                                 catch (InterruptedException h)
                                 {
