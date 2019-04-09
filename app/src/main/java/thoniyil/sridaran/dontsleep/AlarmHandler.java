@@ -50,7 +50,7 @@ public class AlarmHandler extends Fragment {
 
                 try {
                     if (mp == null)
-                        mp = MediaPlayer.create(context, R.raw.beep);
+                        mp = MediaPlayer.create(context, R.raw.beep_cut);
                     else
                     {
                         try {
@@ -95,7 +95,7 @@ public class AlarmHandler extends Fragment {
                                 on.start();*/
 
                                 Log.d("tag", "write before afd; get excited");
-                                AssetFileDescriptor afd = context.getResources().openRawResourceFd(R.raw.fire_truck_sound);
+                                AssetFileDescriptor afd = context.getResources().openRawResourceFd(R.raw.fire_truck_sound_edited_amplified_d);
                                 if (afd == null)
                                     Log.e("tag", "oh no afd is null :(");
                                 mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
