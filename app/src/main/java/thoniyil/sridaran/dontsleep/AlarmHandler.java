@@ -40,7 +40,7 @@ public class AlarmHandler extends Fragment {
 
             public void onTick(long millisUntilFinished) {
                 //this.millisUntilFinished = millisUntilFinished;
-                textBox.setText("Seconds remaining: " + millisUntilFinished / 1000);
+                textBox.setText("Seconds remaining: " + millisUntilFinished / 1000 + 1);
             }
 
             public void onFinish() {
