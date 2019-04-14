@@ -5,4 +5,7 @@
     <string name="interval_prompt_hint_text">Enter interval (minutes)</string>
     <string name="select_interval_submit_text">Confirm</string>
     <string name="alarm_cancel_button_text">Cancel Alarm</string>
+    <string name="prompt_time_text">Prompt Wait Length (seconds)</string>
+    <string name="beep_volume_text">Prompt Volume</string>
+    <string name="truck_volume_text">Alarm Volume</string>
 </resources>

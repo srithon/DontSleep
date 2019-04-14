@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="thoniyil.sridaran.dontsleep.AlarmListActivity"></activity>
+        <activity android:name="thoniyil.sridaran.dontsleep.Settings">
+            android:parentActivityName="thoniyil.sridaran.dontsleep.MainActivity">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="thoniyil.sridaran.dontsleep.MainActivity" />
+        </activity>
         <activity android:name="thoniyil.sridaran.dontsleep.SelectInterval" />
         <activity
             android:name="thoniyil.sridaran.dontsleep.DisplayMessageActivity"

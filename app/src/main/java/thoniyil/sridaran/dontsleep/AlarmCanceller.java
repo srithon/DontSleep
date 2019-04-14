@@ -93,7 +93,9 @@ public class AlarmCanceller {
                         j.printStackTrace();
                     }
 
-                for (int i = 0; i < 10.0 / (DELAY / 1000.0); i++) {
+                float waitTime = Settings.getSetting(Settings.BEEP_WAIT_TIME);
+
+                for (int i = 0; i < waitTime / (DELAY / 1000.0); i++) {
                     Log.d("tag", "Right before get max");
                     int currentVolume = recorder.getMaxAmplitude();
                     Log.d("tag", "right after get max amplitude");

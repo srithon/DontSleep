@@ -40,7 +40,7 @@ public class AlarmHandler extends Fragment {
 
             public void onTick(long millisUntilFinished) {
                 //this.millisUntilFinished = millisUntilFinished;
-                textBox.setText("Seconds remaining: " + millisUntilFinished / 1000 + 1);
+                textBox.setText("Seconds remaining: " + (millisUntilFinished / 1000 + 1));
             }
 
             public void onFinish() {
@@ -54,7 +54,7 @@ public class AlarmHandler extends Fragment {
                     else
                     {
                         try {
-                            AssetFileDescriptor beep_desc = context.getResources().openRawResourceFd(R.raw.beep);
+                            AssetFileDescriptor beep_desc = context.getResources().openRawResourceFd(R.raw.beep_cut);
                             if (beep_desc == null)
                                 Log.e("tag", "oh no beep_desc is null :(");
                             mp.setDataSource(beep_desc.getFileDescriptor(), beep_desc.getStartOffset(), beep_desc.getLength());
@@ -66,7 +66,9 @@ public class AlarmHandler extends Fragment {
                         }
 
                     }
-                    mp.setVolume(50, 50);
+
+                    float beepVolume = Settings.getSetting(Settings.BEEP_VOLUME);
+                    mp.setVolume(beepVolume, beepVolume);
                     mp.setLooping(false);
 
                     mp.setOnCompletionListener((final MediaPlayer j) ->
@@ -83,19 +85,13 @@ public class AlarmHandler extends Fragment {
                             Log.d("tag", "Listen returned false");
 
                             try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException h) {
-
-                            }
-
-                            try {
                                 /*on = MediaPlayer.create(context, R.raw.fire_truck_sound);
                                 on.setVolume(100, 100);
                                 on.setLooping(true);
                                 on.start();*/
 
                                 Log.d("tag", "write before afd; get excited");
-                                AssetFileDescriptor afd = context.getResources().openRawResourceFd(R.raw.fire_truck_sound_edited_amplified_d);
+                                AssetFileDescriptor afd = context.getResources().openRawResourceFd(R.raw.fire_truck_sound_edited_amplified);
                                 if (afd == null)
                                     Log.e("tag", "oh no afd is null :(");
                                 mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
@@ -104,20 +100,18 @@ public class AlarmHandler extends Fragment {
                                 Log.d("tag", "closed afd");
                                 mp.prepare();
                                 Log.d("tag", "prepared");
-                                mp.setVolume(100, 100);
+                                float truckVolume = Settings.getSetting(Settings.TRUCK_VOLUME);
+                                mp.setVolume(truckVolume, truckVolume);
                                 mp.setLooping(true);
                                 Log.d("tag", "about to start");
                                 mp.start();
                                 Log.d("tag", "started");
-
-                                cancelled = true;
                             } catch (Exception e) {
                                 Log.e("ERROR", "Could not find resource!!");
                                 e.printStackTrace();
                             }
                         }
-                        //try {
-                        if (!cancelled)
+                        else
                             AlarmHandler.countDown(interval, ((Activity) context).findViewById(R.id.interval_countdown_text), context);
                         // } catch (Exception e) {
                         //textBox.setText("Ugh thta shit dint work");
