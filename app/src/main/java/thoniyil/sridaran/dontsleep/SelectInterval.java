@@ -15,10 +15,10 @@ public class SelectInterval extends AppCompatActivity {
     public static final String INTERVAL_SELECTED = "thoniyil.sridaran.dontsleep.INTERVAL_SELECTED";
     public static final String TIME_UNIT_TOGGLE = "thoniyil.sridaran.dontsleep.TIME_UNIT_TOGGLE";
 
-    private final Bool timeUnitToggle;
+    private final Wrapper<Boolean> timeUnitToggle;
 
     {
-        timeUnitToggle = new Bool(false);
+        timeUnitToggle = new Wrapper<>(false);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class SelectInterval extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_interval);
 
-        final ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleTimeUnitButton);
+        final ToggleButton toggle = findViewById(R.id.toggle_time_unit_button);
 
         toggle.setOnCheckedChangeListener((CompoundButton buttonView, boolean isChecked) ->
         {
@@ -55,7 +55,7 @@ public class SelectInterval extends AppCompatActivity {
         try
         {
             intervalVal = Integer.parseInt(message);
-            if (intervalVal < 0 || (timeUnitToggle.getState() && intervalVal < 5))
+            if (intervalVal < 0 || (timeUnitToggle.get() && intervalVal < 5))
                 throw new NumberFormatException();
             mess.clearComposingText();
         }
@@ -67,7 +67,7 @@ public class SelectInterval extends AppCompatActivity {
         }
 
         intent.putExtra(INTERVAL_SELECTED, intervalVal);
-        intent.putExtra(TIME_UNIT_TOGGLE, (timeUnitToggle.getState()));
+        intent.putExtra(TIME_UNIT_TOGGLE, (timeUnitToggle.get()));
 
         startActivity(intent);
     }
@@ -76,7 +76,7 @@ public class SelectInterval extends AppCompatActivity {
     {
         ToggleButton b = (ToggleButton) view;
 
-        if (timeUnitToggle.getState())
+        if (timeUnitToggle.get())
             b.setText("Seconds");
         else
             b.setText("Minutes");

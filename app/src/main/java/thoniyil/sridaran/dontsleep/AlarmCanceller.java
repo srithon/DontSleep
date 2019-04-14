@@ -14,7 +14,7 @@ public class AlarmCanceller {
     private static Thread thread;
 
     public static boolean listen(final TextView view) {
-        final BooleanChecker bool = new BooleanChecker(false);
+        final Wrapper<Boolean> booleanWrapper = new Wrapper<>(false);
 
         thread = new Thread(() -> {
             if (sleeping)
@@ -80,7 +80,7 @@ public class AlarmCanceller {
 
             all:
             {
-                bool.set(false);
+                booleanWrapper.set(false);
 
                 lastLevel = recorder.getMaxAmplitude();
 
@@ -105,7 +105,7 @@ public class AlarmCanceller {
 
                     if (change >= VOLUME_DIFFERENCE) {
                         Log.d("tag", "in that one if statemen t");
-                        bool.set(true);
+                        booleanWrapper.set(true);
                         break all;
                     }
 
@@ -139,24 +139,8 @@ public class AlarmCanceller {
             e.printStackTrace();
         }
 
-        return bool.get();
+        return booleanWrapper.get();
         //return bool.get();
         //return false;
-    }
-}
-
-class BooleanChecker {
-    private boolean check;
-
-    public BooleanChecker(boolean check) {
-        this.check = check;
-    }
-
-    public void set(boolean check) {
-        this.check = check;
-    }
-
-    public boolean get() {
-        return check;
     }
 }
